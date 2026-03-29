@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee</title>
+
+    <style>
+        body {
+            font-family: Poppins;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: white;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+        }
+
+        li {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🏢 Employee Dashboard</h2>
+
+    <div class="section">
+        <h3>📋 Complaints</h3>
+        <ul id="complaints"></ul>
+    </div>
+
+    <div class="section">
+        <h3>🚨 SOS Alerts</h3>
+        <ul id="sos"></ul>
+    </div>
+
+</div>
+
+<script>
+async function loadData() {
+    let res = await fetch("/data");
+    let data = await res.json();
+
+    let comp = document.getElementById("complaints");
+    let sos = document.getElementById("sos");
+
+    comp.innerHTML = "";
+    sos.innerHTML = "";
+
+    data.complaints.forEach(c => {
+        let li = document.createElement("li");
+        li.innerText = c.text + " (Pending)";
+        comp.appendChild(li);
+    });
+
+    data.sos.forEach(s => {
+        let li = document.createElement("li");
+        li.innerText = "🚨 " + s;
+        li.style.color = "red";
+        sos.appendChild(li);
+    });
+}
+
+// AUTO REFRESH
+setInterval(loadData, 2000);
+</script>
+
+</body>
+</html>

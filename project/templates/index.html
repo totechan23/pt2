@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <style>
+        body {
+            font-family: Poppins;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #22c55e;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Select Role</h1>
+
+    <button onclick="goCitizen()">👤 Citizen</button>
+    <button onclick="goEmployee()">🏢 Employee</button>
+</div>
+
+<script>
+function goCitizen() {
+    window.location.href = "/citizen";
+}
+
+function goEmployee() {
+    window.location.href = "/employee";
+}
+</script>
+
+</body>
+</html>

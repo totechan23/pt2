@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Citizen</title>
+<div class="chat-box" id="chat"></div>
+
+<input type="text" id="input" placeholder="Type your message...">
+<button onclick="send()">Send</button>
+    <style>
+        body {
+            font-family: Poppins;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            text-align: center;
+            width: 400px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: #22c55e;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Citizen Assistant</h2>
+
+    <input type="text" id="input" placeholder="Describe your issue...">
+    <button onclick="send()">Send</button>
+
+    <p id="response"></p>
+</div>
+
+<script>
+async function send() {
+    let input = document.getElementById("input").value;
+
+    document.getElementById("response").innerText = "Processing...";
+
+    let res = await fetch("/send", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: input})
+    });
+
+    let data = await res.json();
+
+    setTimeout(() => {
+        document.getElementById("response").innerText = data.response;
+    }, 500);
+}
+</script>
+
+</body>
+</html>
